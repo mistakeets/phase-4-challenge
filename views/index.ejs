@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Vinyl</title>
-  <link rel="stylesheet" type="text/css" href="/style.css">
-  <script type="text/javascript" src="/script.js"></script>
+  <% include partials/head %>
 </head>
+
 <body>
 
-  <h1>Vinyl</h1>
+  <header>
+    <% include partials/header %>
+  </header>
 
   <h2>Records</h2>
 
   <div class="album-list">
     <% albums.forEach(function(album) { %>
       <div>
-        <h5><a href="/albums/<%= album.id %>"><%= album.title %></a></h5>
+        <h5>
+          <a href="/albums/<%= album.id %>">
+            <%= album.title %>
+          </a>
+        </h5>
         <span><%= album.artist %></span>
       </div>
-    <% }) %>
+      <% }) %>
   </div>
 
+  <footer class="footer">
+    <% include partials/footer %>
+  </footer>
+
 </body>
+
 </html>
