@@ -40,9 +40,9 @@ router.get('/signin', (request, response) => {
 })
 
 router.post('/signin', (request, response) => {
-  passport.authenticate('sigin', {
-    successRedirect: '/profile',
-    failureRedirect: 'signin'
+  passport.authenticate('signin', {
+    successRedirect: '/users',
+    failureRedirect: '/signin'
   })
 })
 
