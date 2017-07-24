@@ -4,9 +4,10 @@ CREATE TABLE albums (
   artist VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE account (
-  user_id SERIAL,
+CREATE TABLE users (
+  id SERIAL,
   name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL
+  date_joined DATE NOT NULL
 );

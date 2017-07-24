@@ -7,8 +7,8 @@ class User {
   createUser(email, password, name) {
     var hash = bcrypt.hashSync(password);
     return db.one({
-      text: 'INSERT INTO users (email, password, name, date_joined, current_city) VALUES ($1, $2, $3, $4, $5) RETURNING id',
-      values: [email, hash, name, moment().format('M-D-YYYY'), 1]
+      text: 'INSERT INTO users (name, email, password, date_joined) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+      values: [email, hash, name, moment().format('MM-DD-YYYY'), 1]
     })
   }
 
