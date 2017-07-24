@@ -1,0 +1,36 @@
+<% include partials/head %>
+  <header>
+    <% include partials/header %>
+  </header>
+  <br>
+
+  <div class="card text-center lspace rspace">
+    <h3 class="card-header">Sign Up for Vinyl</h3>
+    <div class="card-block">
+      <div class="form-group row">
+        <label for="signup-name" class="col-2 col-form-label">Name</label>
+        <div class="col-10">
+          <input class="form-control" type="text" value="Test Name" id="signup-name">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="signup-email" class="col-2 col-form-label">Email</label>
+        <div class="col-10">
+          <input class="form-control" type="email" value="Test1@gmail.com" id="signup-email">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="signup-password" class="col-2 col-form-label">Password</label>
+        <div class="col-10">
+          <input class="form-control" type="password" value="123456" id="signup-password">
+        </div>
+      </div>
+
+
+      <a href="/auth" class="btn btn-success">Sign Up</a>
+    </div>
+  </div>
+
+  <footer class="footer text-center">
+    <% include partials/footer %>
+  </footer>

@@ -17,3 +17,7 @@ body {
 .lspace {
   margin-left: 10px;
 }
+
+.rspace {
+  margin-right: 20px;
+}
