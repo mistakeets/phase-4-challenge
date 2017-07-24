@@ -11,14 +11,6 @@ router.get('/', (request, response) => {
   })
 })
 
-router.get('/signup', (request, response) => {
-  response.render('signup')
-})
-
-router.get('/signin', (request, response) => {
-  response.render('signin')
-})
-
 router.get('/albums/:albumID', (request, response) => {
   const albumID = request.params.albumID
 
@@ -29,6 +21,28 @@ router.get('/albums/:albumID', (request, response) => {
       const album = albums[0]
       response.render('album', { album: album })
     }
+  })
+})
+
+router.get('/signup', (request, response) => {
+  response.render('signup')
+})
+
+router.post('/signup', (request, response) => {
+  let user = User.createUser(request.body.email, request.body.password, request.body.name)
+  user.then((data) => {
+    response.render('/signin')
+  })
+})
+
+router.get('/signin', (request, response) => {
+  response.render('signin')
+})
+
+router.post('/signin', (request, response) => {
+  passport.authenticate('sigin', {
+    successRedirect: '/profile',
+    failureRedirect: 'signin'
   })
 })
 
