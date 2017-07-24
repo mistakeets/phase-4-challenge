@@ -11,19 +11,41 @@
     <% include partials/header %>
   </header>
 
-  <h2>Records</h2>
+  <div class="jumbotron jumbotron-fluid text-center">
+    <h1 class="display-4">some stock image of vinyl records</h1>
+  </div>
 
-  <div class="album-list">
-    <% albums.forEach(function(album) { %>
-      <div>
-        <h5>
-          <a href="/albums/<%= album.id %>">
-            <%= album.title %>
-          </a>
-        </h5>
-        <span><%= album.artist %></span>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+
+        <h2>Records</h2>
+
+        <div class="album-list">
+          <% albums.forEach(function(album) { %>
+            <div>
+              <h5>
+                <a href="/albums/<%= album.id %>">
+                  <%= album.title %>
+                </a>
+              </h5>
+              <span><%= album.artist %></span>
+            </div>
+            <% }) %>
+        </div>
       </div>
-      <% }) %>
+
+      <div class="col">
+
+        <h2>Recent Reviews</h2>
+
+        <div class="review-list">
+          <p>Placeholder for Album reviews</p>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <footer class="footer">
