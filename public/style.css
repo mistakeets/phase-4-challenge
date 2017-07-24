@@ -1,5 +1,23 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100vw;
+}
+
+.footer {
+  background-color: #cfd2d6;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+}
+
+.lspace {
+  margin-left: 10px;
+}
+
+.rspace {
+  margin-right: 20px;
 }
