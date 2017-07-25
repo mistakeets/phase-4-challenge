@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy
 const database = require('../database')
 const bcrypt = require('bcrypt-nodejs')
 
-passport.use('signin', new LocalStrategy({
+passport.use('login', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true,

@@ -1,5 +1,8 @@
 const router = require('express').Router()
 const database = require('./../database')
+const bcrypt = require('bcrypt-nodejs')
+const moment = require('moment')
+const passport = require('./../config/auth')
 
 router.get('/', (request, response) => {
   database.getAlbums((error, albums) => {
@@ -29,22 +32,29 @@ router.get('/signup', (request, response) => {
 })
 
 router.post('/signup', (request, response) => {
-  let user = database.createUser(request.body.email, request.body.password, request.body.name)
-  user.then((data) => {
-    response.render('/signin')
+  let cryptPword = bcrypt.hashSync(request.body.password)
+  let date_joined = moment().format('MM-DD-YYYY')
+  let certificate = [request.body.name, request.body.email, cryptPword, date_joined]
+
+  database.createUser(certificate, (error) => {
+    if (error) {
+      response.render('signup', { user: null })
+    } else {
+      response.redirect('login')
+    }
   })
 })
 
-router.get('/signin', (request, response) => {
-  response.render('signin')
+router.get('/login', (request, response) => {
+  let user = request.user ? request.user[0] : null
+  response.render('login', { user: user })
 })
 
-router.post('/signin', (request, response) => {
-  passport.authenticate('signin', {
+router.post('/login',
+  passport.authenticate('login', {
     successRedirect: '/users',
-    failureRedirect: '/signin'
-  })
-})
+    failureRedirect: '/login'
+  }))
 
 router.get('/users', (request, response) => {
   response.render('users')
