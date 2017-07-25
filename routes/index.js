@@ -79,12 +79,13 @@ router.get('/profile', userCheck, (request, response) => {
       response.status(500).render('error', { error: error })
     } else {
       let userID = id[0].id
-      database.getUserReviews(userID, (error) => {
+      database.getUserReviews(userID, (error, reviews) => {
         if (error) {
           response.status(500).render('error', { error: error })
         } else {
           response.render('profile', {
-            user: request.user
+            user: request.user,
+            reviews
           })
         }
       })

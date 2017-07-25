@@ -31,7 +31,8 @@ const getAlbumsByID = function(albumID, callback) {
 }
 
 const createUser = function(certificate, callback) {
-  query("INSERT INTO users (name, email, password, date_joined) VALUES ($1, $2, $3, $4) RETURNING *", certificate, callback)
+  query(`INSERT INTO users (name, email, password, date_joined) 
+         VALUES ($1, $2, $3, $4) RETURNING *`, certificate, callback)
 }
 
 const getUserByID = function(id, callback) {
@@ -42,10 +43,18 @@ const getUserByEmail = function(email, callback) {
   query("SELECT * FROM users WHERE email = $1", [email], callback)
 }
 
+const getUserReviews = function(albumID, callback) {
+  query(`SELECT reviews.*, albums.title AS album_title, users.name AS author FROM reviews 
+         JOIN albums ON reviews_album_id = albums.id
+         JOIN users ON reviews.author_id = users.id
+         WHERE albums.id = $1`, [albumID], callback)
+}
+
 module.exports = {
   getAlbums,
   getAlbumsByID,
   createUser,
   getUserByID,
-  getUserByEmail
+  getUserByEmail,
+  getUserReviews
 }
