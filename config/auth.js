@@ -10,14 +10,19 @@ passport.use('signin', new LocalStrategy({
     session: true
   },
   function(req, email, password, done) {
-    user = user[0]
-    if (!user) {
-      return done(null, false)
-    }
-    if (!bcrypt.compareSync(password, user.password)) {
-      return done(null, false)
-    }
-    return done(null, user)
+    database.getUserByEmail(email, (error, user) => {
+      user = user[0]
+      if (error) {
+        return done(error)
+      }
+      if (!user) {
+        return done(null, false)
+      }
+      if (!bcrypt.compareSync(password, user.password)) {
+        return done(null, false)
+      }
+      return done(null, user)
+    })
   }
 ))
 
