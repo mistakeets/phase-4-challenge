@@ -29,7 +29,7 @@ router.get('/signup', (request, response) => {
 })
 
 router.post('/signup', (request, response) => {
-  let user = User.createUser(request.body.email, request.body.password, request.body.name)
+  let user = database.createUser(request.body.email, request.body.password, request.body.name)
   user.then((data) => {
     response.render('/signin')
   })
@@ -44,6 +44,10 @@ router.post('/signin', (request, response) => {
     successRedirect: '/users',
     failureRedirect: '/signin'
   })
+})
+
+router.get('/users', (request, response) => {
+  response.render('users')
 })
 
 module.exports = router

@@ -1,12 +1,12 @@
 const bcrypt = require('bcrypt-nodejs');
 const moment = require('moment');
-const db = require('../database');
+const database = require('../database');
 
 class User {
 
   createUser(email, password, name) {
     var hash = bcrypt.hashSync(password);
-    return db.one({
+    return database.createUser({
       text: 'INSERT INTO users (name, email, password, date_joined) VALUES ($1, $2, $3, $4, $5) RETURNING id',
       values: [email, hash, name, moment().format('MM-DD-YYYY'), 1]
     })

@@ -5,7 +5,7 @@ const app = express()
 const routes = require('./routes')
 const passport = require('./config/auth')
 const session = require('express-session')
-const User = require('./model/user')
+
 
 require('ejs')
 app.set('view engine', 'ejs');

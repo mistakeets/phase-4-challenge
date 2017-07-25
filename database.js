@@ -7,15 +7,15 @@ const client = new pg.Client(connectionString)
 client.connect()
 
 // Query helper function
-const query = function(sql, variables, callback){
+const query = function(sql, variables, callback) {
   console.log('QUERY ->', sql.replace(/[\n\s]+/g, ' '), variables)
 
-  client.query(sql, variables, function(error, result){
-    if (error){
+  client.query(sql, variables, function(error, result) {
+    if (error) {
       console.log('QUERY <- !!ERROR!!')
       console.error(error)
       callback(error)
-    }else{
+    } else {
       console.log('QUERY <-', JSON.stringify(result.rows))
       callback(error, result.rows)
     }
@@ -30,7 +30,22 @@ const getAlbumsByID = function(albumID, callback) {
   query("SELECT * FROM albums WHERE id = $1", [albumID], callback)
 }
 
+const createUser = function(callback) {
+  query("INSERT INTO users (name, email, password, date_joined) VALUES ($1, $2, $3, $4)", [user_id], callback)
+}
+
+const getUserByID = function(id, callback) {
+  query("SELECT * FROM users WHERE id = $1", [id], callback)
+}
+
+const getUserByEmail = function(email, callback) {
+  query("SELECT * FROM users WHERE email = $1", [email], callback)
+}
+
 module.exports = {
   getAlbums,
-  getAlbumsByID
+  getAlbumsByID,
+  createUser,
+  getUserByID,
+  getUserByEmail
 }
