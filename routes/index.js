@@ -1,8 +1,5 @@
 const router = require('express').Router()
 const database = require('./../database')
-const bcrypt = require('bcrypt-nodejs')
-const moment = require('moment')
-const passport = require('./../config/auth')
 
 router.get('/', (request, response) => {
   database.getAlbums((error, albums) => {
@@ -26,6 +23,5 @@ router.get('/albums/:albumID', (request, response) => {
     }
   })
 })
-
 
 module.exports = router

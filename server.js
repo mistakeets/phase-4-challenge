@@ -1,11 +1,13 @@
 const express = require('express')
+const app = express()
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-const app = express()
+const database = require('./database')
 const routes = require('./routes')
-const passport = require('./config/auth')
+const passport = require('./config/passport')
 const session = require('express-session')
-
+const bcrypt = require('bcrypt-nodejs')
+const moment = require('moment')
 
 require('ejs')
 app.set('view engine', 'ejs');
@@ -62,8 +64,6 @@ app.get('/users', (request, response) => {
     user: request.user
   })
 })
-
-
 
 app.use((request, response) => {
   response.status(404).render('not_found')
