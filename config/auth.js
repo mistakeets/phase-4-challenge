@@ -3,21 +3,6 @@ const LocalStrategy = require('passport-local').Strategy
 const database = require('../database')
 const bcrypt = require('bcrypt-nodejs')
 
-// passport.use('login', new LocalStrategy({
-//         usernameField: 'email',
-//         passwordField: 'password',
-//         passReqToCallback: true,
-//         session: true
-//       },
-//       function(req, email, password, done) {
-//         database.getUserByEmail(email, (error, user) => {
-//           user = user[0]
-//           if (!user) {
-//             return done(null, false)
-//           }
-//         })
-//       }
-
 passport.use('signin', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
@@ -35,8 +20,6 @@ passport.use('signin', new LocalStrategy({
     return done(null, user)
   }
 ))
-
-
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
