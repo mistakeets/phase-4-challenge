@@ -1,12 +1,20 @@
-<% include partials/head %>
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <% include partials/head %>
+</head>
+
+<body>
+
   <header>
     <% include partials/header %>
   </header>
   <br>
 
-  <div class="card text-center lspace rspace">
+  <div class="card border-0 text-center lspace rspace">
     <form method="post" action='/signup'>
-      <h3 class="card-header">Sign Up for Vinyl</h3>
+      <h3>Sign Up for Vinyl</h3>
       <div class="card-block">
         <div class="form-group row">
           <label for="input-name" class="col-2 col-form-label">Name</label>
@@ -32,6 +40,10 @@
     </form>
   </div>
 
-  <footer class="footer text-center">
+  <footer class="footer">
     <% include partials/footer %>
   </footer>
+
+</body>
+
+</html>
