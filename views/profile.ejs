@@ -1,11 +1,62 @@
-<% include partials/head %>
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <% include partials/head %>
+</head>
+
+<body>
+
   <header>
     <% include partials/header %>
   </header>
-  <br>
 
-  <p> Logged In Test Page</p>
+  <div class="d-flex flex-row">
+    <div class="d-flex flex-column">
+      <div class="p-2">
+        <img src="http://via.placeholder.com/300x300">
+      </div>
+    </div>
 
-  <footer class="footer text-center">
+    <div class="d-flex flex-column">
+      <div class="p-2">
+        <h1>
+          <%= user.name %>
+
+        </h1>
+      </div>
+      <div class="p-2">
+        <p>Email:
+          <%= user.email %>
+        </p>
+      </div>
+      <div class="p-2">
+        <p>Date Joined:
+          <%= user.date_joined %>
+        </p>
+      </div>
+      <div class="p-2">
+        <h2> Reviews </h2>
+        <% reviews.forEach(function(review) { %>
+          <div>
+            <h5>
+              <a href="/albums/<%= review.album.id %>">
+                <%= review.title %>
+              </a>
+            </h5>
+            <div>
+              <%= review.content %>
+            </div>
+          </div>
+          <% })%>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
     <% include partials/footer %>
   </footer>
+
+</body>
+
+</html>
