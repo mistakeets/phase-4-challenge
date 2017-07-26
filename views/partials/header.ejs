@@ -1,16 +1,13 @@
 <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
   <a class="navbar-brand" href="/">Vinyl</a>
   <div class="collapse navbar-collapse" id="navbarNav">
   </div>
   <% if (locals.user) { %>
-    <a href="/profile" class="btn btn-primary my-2 my-sm-0 lspace">Profile</a>
-    <a href="/logout" class="btn btn-primary my-2 my-sm-0 lspace">Sign Out</a>
+    <a href="/profile" class="btn my-2 my-sm-0 lspace">Profile</a>
+    <a href="/logout" class="btn my-2 my-sm-0 lspace">Sign Out</a>
     <% } else { %>
-      <a href="/signup" class="btn btn-primary my-2 my-sm-0 lspace">Sign Up</a>
-      <a href="/login" class="btn btn-primary my-2 my-sm-0 lspace">Sign In</a>
+      <a href="/signup" class="btn my-2 my-sm-0 lspace">Sign Up</a>
+      <a href="/login" class="btn my-2 my-sm-0 lspace">Sign In</a>
       <% } %>
 </nav>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
