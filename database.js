@@ -43,11 +43,43 @@ const getUserByEmail = function(email, callback) {
   query("SELECT * FROM users WHERE email = $1", [email], callback)
 }
 
-const getUserReviews = function(albumID, callback) {
-  query(`SELECT reviews.*, albums.title AS album_title, users.name AS author FROM reviews 
-         JOIN albums ON reviews_album_id = albums.id
+// const getUserReviews = function(albumID, callback) {
+//   query(`SELECT reviews.id, review, albums.title AS album_title, users.name AS author FROM reviews 
+//          JOIN albums ON reviews.album_id = albums.id
+//          JOIN users ON reviews.author_id = users.id
+//          WHERE albums.id = $1`, [albumID], callback)
+// }
+
+const addReview = function(user, id, albumID, albumTitle, content, reviewDate, callback) {
+  query(`INSERT INTO reviews(title, content, review_date, author_id, album_id)
+         VALUES ($1, $2, $3, $4, $5)`, [albumTitle, review, id, albumID, reviewDate], callback)
+}
+
+const deleteReview = function(reviewID, callback) {
+  query("DELETE FROM reviews WHERE id = $1", [reviewID], callback)
+}
+
+const reviewsByAlbum = function(albumID, callback) {
+  query(`SELECT reviews.*, albums.title, users.name FROM reviews 
+         JOIN albums ON albums.id = reviews.album_id 
+         JOIN users ON users.id = reviews.author_id 
+         WHERE album_id = $1 
+         ORDER BY created DESC`, [albumID], callback)
+}
+
+const reviewsByUser = function(userID, callback) {
+  query(`SELECT reviews.*, albums.title FROM reviews 
+         JOIN albums ON reviews.albums_id = album.id
          JOIN users ON reviews.author_id = users.id
-         WHERE albums.id = $1`, [albumID], callback)
+         WHERE user_id = $1 
+         ORDER BY created DESC`, [userID], callback)
+}
+
+const recentReviews = function(amount, callback) {
+  query(`SELECT reviews.*, albums.title, users.name FROM reviews 
+         JOIN albums ON albums.id = reviews.album_id 
+         JOIN users ON users.id = reviews.author_id 
+         ORDER BY created DESC LIMIT $1`, [amount], callback)
 }
 
 module.exports = {
@@ -56,5 +88,9 @@ module.exports = {
   createUser,
   getUserByID,
   getUserByEmail,
-  getUserReviews
+  addReview,
+  deleteReview,
+  reviewsByAlbum,
+  reviewsByUser,
+  recentReviews
 }
