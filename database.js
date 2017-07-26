@@ -60,26 +60,26 @@ const deleteReview = function(reviewID, callback) {
 }
 
 const reviewsByAlbum = function(albumID, callback) {
-  query(`SELECT reviews.*, albums.title, users.name FROM reviews 
-         JOIN albums ON albums.id = reviews.album_id 
-         JOIN users ON users.id = reviews.author_id 
-         WHERE album_id = $1 
-         ORDER BY created DESC`, [albumID], callback)
+  query(`SELECT reviews.*, albums.title AS album_title, users.name AS author FROM reviews 
+         JOIN albums ON reviews.album_id = albums.id
+         JOIN users ON reviews.author_id = users.id
+         WHERE albums.id = $1 
+         ORDER BY review_date DESC`, [albumID], callback)
 }
 
 const reviewsByUser = function(userID, callback) {
-  query(`SELECT reviews.*, albums.title FROM reviews 
-         JOIN albums ON reviews.albums_id = album.id
+  query(`SELECT reviews.*, albums.title AS album_title, users.name AS author FROM reviews  
+         JOIN albums ON reviews.album_id = albums.id
          JOIN users ON reviews.author_id = users.id
-         WHERE user_id = $1 
-         ORDER BY created DESC`, [userID], callback)
+         WHERE users.id = $1 
+         ORDER BY review_date DESC`, [userID], callback)
 }
 
 const recentReviews = function(amount, callback) {
-  query(`SELECT reviews.*, albums.title, users.name FROM reviews 
-         JOIN albums ON albums.id = reviews.album_id 
-         JOIN users ON users.id = reviews.author_id 
-         ORDER BY created DESC LIMIT $1`, [amount], callback)
+  query(`SELECT reviews.*, albums.title AS album_title, users.name AS author FROM reviews 
+         JOIN albums ON reviews.album_id = albums.id
+         JOIN users ON reviews.author_id = users.id
+         ORDER BY review_date DESC LIMIT $1`, [amount], callback)
 }
 
 module.exports = {
