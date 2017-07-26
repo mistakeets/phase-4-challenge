@@ -43,16 +43,9 @@ const getUserByEmail = function(email, callback) {
   query("SELECT * FROM users WHERE email = $1", [email], callback)
 }
 
-// const getUserReviews = function(albumID, callback) {
-//   query(`SELECT reviews.id, review, albums.title AS album_title, users.name AS author FROM reviews 
-//          JOIN albums ON reviews.album_id = albums.id
-//          JOIN users ON reviews.author_id = users.id
-//          WHERE albums.id = $1`, [albumID], callback)
-// }
-
-const addReview = function(user, id, albumID, albumTitle, content, reviewDate, callback) {
+const addReview = function(userID, albumID, albumTitle, content, reviewDate, callback) {
   query(`INSERT INTO reviews(title, content, review_date, author_id, album_id)
-         VALUES ($1, $2, $3, $4, $5)`, [albumTitle, review, id, albumID, reviewDate], callback)
+         VALUES ($1, $2, $3, $4, $5)`, [albumTitle, content, userID, albumID, reviewDate], callback)
 }
 
 const deleteReview = function(reviewID, callback) {

@@ -1,18 +1,63 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Vinyl : <%= album.title %></title>
-  <link rel="stylesheet" type="text/css" href="/style.css">
-  <script type="text/javascript" src="/script.js"></script>
+  <% include partials/head %>
+    <title>Vinyl :
+      <%= album.title %>
+    </title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <script type="text/javascript" src="/script.js"></script>
 </head>
+
 <body>
 
-  <h1><%= album.title %></h1>
-  <em>by <%= album.artist %></em>
+  <header>
+    <% include partials/header %>
+  </header>
 
-  <h2>Reviews</h2>
+  <div class="container text-center">
+    <h1>
+      <%= album.title %>
+    </h1>
+    <em>by <%= album.artist %></em>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col">
+        <div class="reviews-list">
+          <h2>Reviews</h2>
 
-  <!-- TODO: implement album reviews -->
+          <% reviews.forEach(function(review) { %>
+            <div>
+              <h5>
+                <a href="/albums/<%= review.album_id %>">
+                  <%= review.title %>
+                </a>
+              </h5>
+              <div>
+                <%= review.content %>
+              </div>
+              by
+              <a href="/users/<%= review.author_id %>">
+                <%= review.author_id %>
+              </a>
+            </div>
+            <% })%>
+        </div>
+      </div>
+
+      <div class="col">
+        <a href="/newReview/<%= album.id %>" class="btn btn-primary"> Add Review </a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="footer">
+    <% include partials/footer %>
+  </footer>
 
 </body>
+
 </html>
